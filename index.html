@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Management</title>
+    <title>NGO Donation & Volunteer Management</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Student Management</h1>
+    <h1>NGO Management</h1>
 
-    <!-- Add Student Form -->
-    <form id="studentForm">
-        <h2>Add New Student</h2>
+    <!-- Add User Form -->
+    <form id="userForm">
+        <h2>Add Donor / Volunteer</h2>
         <input type="text" id="name" placeholder="Name" required>
-        <input type="text" id="regno" placeholder="Regno" required>
-        <input type="number" id="cgpa" placeholder="CGPA" step="0.01" required>
-        <button type="submit">Add Student</button>
+        <input type="email" id="email" placeholder="Email" required>
+        <select id="role" required>
+            <option value="">Select Role</option>
+            <option value="Donor">Donor</option>
+            <option value="Volunteer">Volunteer</option>
+        </select>
+        <input type="number" id="donationAmount" placeholder="Donation Amount (for Donors)">
+        <button type="submit">Add User</button>
     </form>
 
-    <!-- Message Display -->
     <p id="message"></p>
 
-    <!-- Students Table -->
+    <!-- Users Table -->
     <table>
         <thead>
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Regno</th>
-                <th>CGPA</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Donation</th>
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody id="studentTable">
-            <tr>
-                <td colspan="5">No students yet</td>
-            </tr>
+        <tbody id="userTable">
+            <tr><td colspan="6">No users yet</td></tr>
         </tbody>
     </table>
 
