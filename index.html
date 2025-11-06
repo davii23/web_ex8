@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Student Management</h1>
+
+    <!-- Add Student Form -->
+    <form id="studentForm">
+        <h2>Add New Student</h2>
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="text" id="regno" placeholder="Regno" required>
+        <input type="number" id="cgpa" placeholder="CGPA" step="0.01" required>
+        <button type="submit">Add Student</button>
+    </form>
+
+    <!-- Message Display -->
+    <p id="message"></p>
+
+    <!-- Students Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Regno</th>
+                <th>CGPA</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="studentTable">
+            <tr>
+                <td colspan="5">No students yet</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
