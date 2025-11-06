@@ -1,57 +1,58 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const Student = require("./models/Student");
+const User = require("./models/User");
 
 const app = express();
 app.use(cors());
 app.use(express.json()); // parse JSON
 
 // MongoDB connection
-mongoose.connect("mongodb://127.0.0.1:27017/college")
+mongoose.connect("mongodb://127.0.0.1:27017/ngoDB")
 .then(() => console.log("✅ MongoDB connected"))
 .catch(err => console.log("MongoDB connection error:", err));
 
-// API: View all students
+// API: View all users (donors and volunteers)
 app.get("/api/viewAll", async (req, res) => {
-    const students = await Student.find();
-    res.json(students);
+    const users = await User.find();
+    res.json(users);
 });
 
-// API: Add new student
+// API: Add new user
 app.post("/api/addNew", async (req, res) => {
     try {
-        const { name, regno, cgpa } = req.body;
-        const newStudent = new Student({
+        const { name, email, role, donationAmount } = req.body;
+        const newUser = new User({
             name: name.trim(),
-            regno: regno.trim(),
-            cgpa: Number(cgpa)
+            email: email.trim(),
+            role,
+            donationAmount: role === "Donor" ? Number(donationAmount) : undefined
         });
-        await newStudent.save();
-        res.json({ status: "Data Saved Successfully" });
+        await newUser.save();
+        res.json({ status: "User added successfully" });
     } catch(err) {
         if(err.code === 11000) {
-            res.json({ status: `${req.body.name} already exists` });
+            res.json({ status: `${req.body.email} already exists` });
         } else {
             res.json({ status: err.message });
         }
     }
 });
 
-// API: Delete student by ID
+// API: Delete user by ID
 app.post("/api/deleteUser", async (req, res) => {
     const { id } = req.body;
     try {
-        await Student.findByIdAndDelete(id);
+        await User.findByIdAndDelete(id);
         res.json({ status: "User deleted successfully" });
     } catch(err) {
         res.json({ status: "Error deleting user" });
     }
 });
 
-// Test Route
+// Test route
 app.get("/", (req, res) => {
-    res.send("Hello from Node + Express + MongoDB!");
+    res.send("Hello from NGO Node.js + MongoDB App!");
 });
 
 const PORT = 7000;
